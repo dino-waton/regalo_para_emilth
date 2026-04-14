@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para Starlight ✨</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+    background: radial-gradient(circle at top, #1a1a2e, #0f0f1a);
+    color: white;
+}
+
+/* Estrellas */
+.star {
+    position: fixed;
+    width: 2px;
+    height: 2px;
+    background: white;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from {opacity: 0.2;}
+    to {opacity: 1;}
+}
+
+/* Contenedor */
+.container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Carta mejorada */
+.card {
+    background: rgba(0,0,0,0.55); /* más oscuro para contraste */
+    backdrop-filter: blur(10px);
+    padding: 45px;
+    border-radius: 20px;
+    width: 400px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(0,0,0,0.8);
+    animation: fadeIn 2s ease;
+}
+
+/* Animación */
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* Título */
+h1 {
+    font-size: 2.5em;
+    color: #ffd6ff;
+    text-shadow: 0 0 15px rgba(255,255,255,0.4);
+}
+
+/* Texto mejorado */
+p {
+    font-size: 19px;
+    line-height: 1.7;
+    color: #f1f1f1;
+    text-shadow: 0 0 5px rgba(0,0,0,0.7);
+}
+
+/* Botón */
+button {
+    margin-top: 20px;
+    padding: 12px 22px;
+    border-radius: 25px;
+    border: none;
+    background: linear-gradient(45deg, #6c63ff, #9a8cff);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255,255,255,0.5);
+}
+
+/* Sección cumpleaños */
+#cumple {
+    display: none;
+}
+
+/* Mensaje final */
+#final {
+    margin-top: 15px;
+    opacity: 0;
+    transition: 1s;
+}
+
+/* Confetti */
+.confetti {
+    position: fixed;
+    top: -10px;
+    width: 10px;
+    height: 10px;
+    animation: caer 5s linear infinite;
+}
+
+@keyframes caer {
+    to {
+        transform: translateY(100vh) rotate(720deg);
+    }
+}
+</style>
+
+</head>
+<body>
+
+<!-- HISTORIA -->
+<div class="container" id="historia">
+    <div class="card">
+        <h1>Para Starlight ✨</h1>
+
+        <p id="texto">
+            No sé exactamente en qué momento pasó...
+        </p>
+
+        <button onclick="next()">Siguiente ➜</button>
+    </div>
+</div>
+
+<!-- CUMPLEAÑOS -->
+<div class="container" id="cumple">
+    <div class="card">
+        <h1>Feliz cumpleaños, Starlight ✨🎂</h1>
+
+        <p>
+            Hoy no es un día cualquiera...<br><br>
+            es el día en que nació alguien que hizo mis días más especiales 💫
+        </p>
+
+        <button onclick="mostrarFinal()">Un último detalle 🎁</button>
+
+        <p id="final">
+            Gracias por existir, Mia 💖<br><br>
+            y por dejarme ser parte de tu vida...<br><br>
+            espero que esto siga creciendo poco a poco ✨
+        </p>
+    </div>
+</div>
+
+<script>
+let paso = 0;
+
+function next() {
+    let texto = document.getElementById("texto");
+
+    if (paso === 0) {
+        texto.innerHTML = "pero hablar contigo se volvió algo que espero todos los días.";
+    } else if (paso === 1) {
+        texto.innerHTML = "No quiero apresurar nada...";
+    } else if (paso === 2) {
+        texto.innerHTML = "solo quiero que sepas que lo que tenemos, me gusta mucho.";
+    } else if (paso === 3) {
+        document.getElementById("historia").style.display = "none";
+        document.getElementById("cumple").style.display = "block";
+        lanzarConfetti();
+    }
+
+    paso++;
+}
+
+function mostrarFinal() {
+    document.getElementById("final").style.opacity = 1;
+}
+
+/* Estrellas */
+for (let i = 0; i < 100; i++) {
+    let star = document.createElement("div");
+    star.className = "star";
+    star.style.top = Math.random() * 100 + "vh";
+    star.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(star);
+}
+
+/* Confetti */
+function lanzarConfetti() {
+    setInterval(() => {
+        let c = document.createElement("div");
+        c.className = "confetti";
+        c.style.left = Math.random() * 100 + "vw";
+        c.style.background = "hsl(" + Math.random()*360 + ",100%,70%)";
+        document.body.appendChild(c);
+
+        setTimeout(() => c.remove(), 5000);
+    }, 150);
+}
+</script>
+
+</body>
+</html>
